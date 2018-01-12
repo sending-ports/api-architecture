@@ -1,0 +1,40 @@
+#%RAML 1.0
+title: Architecture
+version: v1
+protocols: [ HTTPS ]
+baseUri: https://github.com/jRaphaDev/logistic-service.git
+mediaType:  application/json
+securitySchemes:
+  basicAuth:
+    description: Each request must contain the headers necessary for basic authentication
+    type: Basic Authentication
+    describedBy:
+      headers:
+        Authorization:
+          description: Used to send the Base64-encoded "username:password" credentials
+          type: string
+      responses:
+        401:
+          description: | Unauthorized. Either the provided username and password combination is invalid, or the user is not allowed to access the content provided by the requested URL.
+/authentication:
+  post:
+    description: Create a new token
+    body:
+      application/json:
+        type: Token
+        example: { "token" : "Another token" }
+    responses:
+      201:
+        body:
+          application/json:
+            type: Token
+            example: { "token" : "Another token" }
+
+
+types:
+  Token:
+    type: object
+    properties:
+      token:
+        required: true
+        type: string
