@@ -6,7 +6,7 @@ node('testing') {
   }
 
   stage('Checkout') {
-      echo 'Getting source code...'
+      echo 'Getting source code... !'
       checkout scm
   }
 
